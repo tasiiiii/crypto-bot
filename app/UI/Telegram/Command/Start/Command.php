@@ -2,6 +2,8 @@
 
 namespace CryptoBot\UI\Telegram\Command\Start;
 
+use CryptoBot\Application\User\Action\CreateUserAction;
+use CryptoBot\UI\Telegram\Command\Start\Dto\CreateUserData;
 use Telegram\Bot\Commands\Command as BaseCommand;
 
 class Command extends BaseCommand
@@ -10,7 +12,8 @@ class Command extends BaseCommand
     protected $description = 'Start Onion Crypto Bot';
 
     public function __construct(
-        private readonly MessageBuilder $messageBuilder
+        private readonly CreateUserAction $createUserAction,
+        private readonly MessageBuilder   $messageBuilder
     )
     {}
 
@@ -21,5 +24,10 @@ class Command extends BaseCommand
         $this->replyWithMessage(['text' => $message->getText(), 'parse_mode' => 'markdown']);
 
         $this->triggerCommand('main');
+
+        $telegramUserId = $this->getUpdate()->getMessage()->get('from')->get('id');
+        $createUerData  = (new CreateUserData())->setTelegramUserId($telegramUserId);
+
+        $this->createUserAction->run($createUerData);
     }
 }

@@ -194,7 +194,7 @@ return [
         // CryptoBot\Providers\BroadcastServiceProvider::class,
         CryptoBot\Providers\EventServiceProvider::class,
         CryptoBot\Providers\RouteServiceProvider::class,
-
+        CryptoBot\Providers\RepositoryServiceProvider::class,
     ],
 
     /*
