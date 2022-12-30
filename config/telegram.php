@@ -110,6 +110,10 @@ return [
         CryptoBot\UI\Telegram\Command\MainMenu\Command::class,
     ],
 
+    'events'                       => [
+        CryptoBot\UI\Telegram\Event\Balance\Event::class,
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Command Groups [Optional]
